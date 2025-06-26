@@ -190,4 +190,5 @@ def recommend_anime(target_user_id):
         return jsonify({"error": f"Internal error: {e}"}), 500
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    port = int(os.environ.get("PORT", 5000))  # Use Render's port if available
+    app.run(host='0.0.0.0', port=port)
