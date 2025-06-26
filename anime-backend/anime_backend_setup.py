@@ -7,6 +7,17 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from keras.models import load_model
 from sklearn.preprocessing import LabelEncoder
+import gdown
+
+# Helper to download model_df.pkl if not found
+def download_model_df_from_drive():
+    file_id = "1r6_PVcdJBqzEdokcqiu6jN93k5h-42y9"  # Replace with your file ID
+    url = f"https://drive.google.com/uc?id={file_id}"
+    output_path = os.path.join(file_path, 'model_df.pkl')
+    if not os.path.exists(output_path):
+        print("📦 Downloading model_df.pkl from Google Drive...")
+        gdown.download(url, output_path, quiet=False)
+        print("✅ Downloaded model_df.pkl.")
 
 # Load files from current directory
 file_path = './'
@@ -24,6 +35,7 @@ data_load_error = None
 # Load Data & Model
 try:
     print("\U0001F680 Loading data and model...")
+    download_model_df_from_drive() 
 
     model_df = pd.read_pickle(os.path.join(file_path, 'model_df.pkl'))
     user_encoder = LabelEncoder()
