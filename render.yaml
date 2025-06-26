@@ -5,5 +5,4 @@ services:
     rootDir: anime-backend
     buildCommand: pip install -r requirements.txt
     startCommand: python app.py
-    build:
-      pythonVersion: 3.10.13
+    pythonVersion: 3.10.13
